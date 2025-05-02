@@ -66,8 +66,8 @@ Follow these steps to get the project up and running locally.
 
 1. **Clone the repository**:
    ```bash
-   git clone <repo-url>
-   cd <repo-folder>/backend
+   git clone <`https://github.com/Empero47/VotingApp`>
+   cd VotingApp `idea .` or `code .`
    ```
 2. **Configure MySQL**:
     - Create database `voting_db` in your MySQL server.

@@ -1,4 +1,4 @@
-package com.bolton.votingapp.infrastructure.persistence.entity;
+package com.bolton.votingapp.domain.repository;
 
 import com.bolton.votingapp.domain.model.Vote;
 import org.springframework.data.jpa.repository.JpaRepository;

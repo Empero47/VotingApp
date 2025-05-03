@@ -2,8 +2,8 @@ package com.bolton.votingapp.application.service;
 
 import com.bolton.votingapp.domain.model.Vote;
 import com.bolton.votingapp.domain.model.Candidate;
-import com.bolton.votingapp.infrastructure.persistence.entity.VoteRepository;
-import com.bolton.votingapp.infrastructure.persistence.entity.CandidateRepository;
+import com.bolton.votingapp.domain.repository.VoteRepository;
+import com.bolton.votingapp.domain.repository.CandidateRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

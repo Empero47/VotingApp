@@ -1,18 +1,22 @@
 package com.bolton.votingapp.domain.model;
 
-import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Candidate {
-    @Id
-    @GeneratedValue
     private Long id;
-
+    private Long electionId;
     private String name;
     private int voteCount;
+
+    public Candidate(Long electionId, String name) {
+        this(null, electionId, name, 0);
+    }
+
+    public void incrementVote() {
+        this.voteCount++;
+    }
 }

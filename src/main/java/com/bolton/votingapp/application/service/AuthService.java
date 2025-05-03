@@ -1,7 +1,7 @@
 package com.bolton.votingapp.application.service;
 
 import com.bolton.votingapp.domain.model.Voter;
-import com.bolton.votingapp.infrastructure.persistence.entity.VoterRepository;
+import com.bolton.votingapp.domain.repository.VoterRepository;
 import com.bolton.votingapp.application.security.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

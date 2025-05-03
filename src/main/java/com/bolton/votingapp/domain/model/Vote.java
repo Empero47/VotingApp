@@ -1,21 +1,13 @@
 package com.bolton.votingapp.domain.model;
 
-import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vote {
-    @Id
-    @GeneratedValue
     private Long id;
-
-    @ManyToOne
-    private Voter voter;
-
-    @ManyToOne
-    private Candidate candidate;
+    private Long voterId;
+    private Long candidateId;
 }

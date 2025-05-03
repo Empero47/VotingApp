@@ -8,12 +8,12 @@ import lombok.*;
 @AllArgsConstructor
 public class Candidate {
     private Long id;
-    private Long electionId;
+    private Election election;
     private String name;
     private int voteCount;
 
-    public Candidate(Long electionId, String name) {
-        this(null, electionId, name, 0);
+    public Candidate(Election election, String name) {
+        this(null, election, name, 0);
     }
 
     public void incrementVote() {

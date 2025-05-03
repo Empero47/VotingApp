@@ -45,6 +45,6 @@ public class VoterRepositoryImpl implements VoterRepository {
 
     @Override
     public Optional<Voter> findById(long id) {
-        return voterJpaRepository.findById(id).map(VoterMapper::toDomain);
+        return voterJpaRepository.findById(id).map(voterMapper::toDomain);
     }
 }

@@ -31,7 +31,7 @@ public class CastVoteServiceImpl implements CastVoteUseCase {
 
         if (voter.isHasVoted()) throw new IllegalStateException("Already voted");
 
-        Vote vote = new Vote(null, voter, candidate);
+        Vote vote = new Vote(null, voter.getId(), candidate.getId());
         voter.setHasVoted(true);
         candidate.setVoteCount(candidate.getVoteCount() + 1);
 

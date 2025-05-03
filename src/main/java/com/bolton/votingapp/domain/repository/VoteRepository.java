@@ -7,7 +7,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface VoteRepository extends JpaRepository<Vote, Long> {
+public interface VoteRepository {
+
+    // Save votes
+    Vote save(Vote vote);
+
+    // Check if has voted
+    boolean hasVoted(Long voterId);
 
     // Find all votes for a specific election or candidate
     List<Vote> findByElectionId(Long electionId);

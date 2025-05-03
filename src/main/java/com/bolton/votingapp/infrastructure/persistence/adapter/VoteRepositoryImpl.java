@@ -7,6 +7,8 @@ import com.bolton.votingapp.domain.repository.VoteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class VoteRepositoryImpl implements VoteRepository {
@@ -22,5 +24,20 @@ public class VoteRepositoryImpl implements VoteRepository {
     @Override
     public boolean hasVoted(Long voterId) {
         return voteJpaRepository.existsByVoterId(voterId);
+    }
+
+    @Override
+    public List<Vote> findByElectionId(Long electionId) {
+        return List.of();
+    }
+
+    @Override
+    public List<Vote> findByVoterId(Long voterId) {
+        return List.of();
+    }
+
+    @Override
+    public Vote findById(long id) {
+        return null;
     }
 }

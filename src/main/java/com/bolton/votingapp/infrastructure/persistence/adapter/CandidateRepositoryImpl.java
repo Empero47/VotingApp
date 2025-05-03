@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -34,7 +35,12 @@ public class CandidateRepositoryImpl implements CandidateRepository {
     }
 
     @Override
-    public void deleteById(Long id) {
-        candidateJpaRepository.deleteById(id);
+    public Candidate findByName(String name) {
+        return null;
+    }
+
+    @Override
+    public Optional<Candidate> findById(Long id) {
+        return Optional.empty();
     }
 }

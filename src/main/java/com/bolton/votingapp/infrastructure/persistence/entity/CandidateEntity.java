@@ -15,12 +15,16 @@ public class CandidateEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "election_id", nullable = false)
-    private Long electionId;
 
-    @Column(nullable = false)
+//    private Long electionId;
+
+    //@Column(nullable = false)
     private String name;
 
-    @Column(name = "vote_count", nullable = false)
+    //@Column(name = "vote_count", nullable = false)
     private int voteCount;
+
+//    @Column(name = "election_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private ElectionEntity election;
 }

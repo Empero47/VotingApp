@@ -18,9 +18,9 @@ public class VoterServiceImpl implements VoterService {
 
     @Override
     public Voter registerVoter(Voter voter) {
-        VoterEntity entity = voterMapper.toEntity(voter); // Mapping domain to entity
-        VoterEntity saved = voterRepository.save(entity); // Save to DB
-        return voterMapper.toDomain(saved); // Convert back to domain model
+        // VoterEntity entity = voterMapper.toEntity(voter); // Mapping domain to entity
+        Voter saved = voterRepository.save(voter); // Save to DB
+        return saved; // Convert back to domain model
     }
 
     @Override
@@ -30,7 +30,7 @@ public class VoterServiceImpl implements VoterService {
 
     @Override
     public List<Voter> getAllVoters() {
-        List<VoterEntity> voterEntities = voterRepository.findAll(); // Get all entities
-        return voterMapper.toDomain(voterEntities); // Map to domain objects
+        List<Voter> voters = voterRepository.findAll(); // Get all entities
+        return voters; // Map to domain objects
     }
 }

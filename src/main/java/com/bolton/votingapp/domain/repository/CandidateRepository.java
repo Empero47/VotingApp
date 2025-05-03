@@ -8,7 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CandidateRepository extends JpaRepository<Candidate, Long> {
+public interface CandidateRepository{
+
+    // Save Candidates
+    Candidate save(Candidate candidate);
 
     // Find all candidates in a specific election
     List<Candidate> findByElectionId(Long electionId);
@@ -17,6 +20,6 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
     Candidate findByName(String name);
 
     // Find a candidate by their ID (used for querying candidate details)
-    Candidate findById(long id);
+//    Candidate findById(Long id);
     Optional<Candidate> findById(Long id);
 }

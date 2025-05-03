@@ -1,54 +1,224 @@
-# React + TypeScript + Vite
+# 🗳️ VotingApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**VotingApp** is a full-stack online voting system built with **Spring Boot**, **MySQL**, and **React + Vite**. It leverages Domain-Driven Design (DDD) principles for clean architecture and JWT authentication for security.
 
-Currently, two official plugins are available:
+## 📚 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* Voter registration & login (JWT)
+* Cast a vote for candidates
+* Real-time result tallying
+* Admin panel for managing candidates
+* Route protection for authenticated users
 
-## Expanding the ESLint configuration
+## 🗂️ Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Backend (`com.bolton.votingapp`)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+com.bolton.votingapp
+├── application
+│   ├── config               # Spring configurations (CORS, JWT, etc.)
+│   ├── mapper               # MapStruct mappers
+│   ├── service              # Application layer services
+├── domain
+│   ├── exception            # Domain-specific exceptions
+│   ├── model                # Aggregate roots and entities (Voter, Candidate, Vote)
+│   ├── repository           # Domain-level interfaces
+│   └── valueobject          # Immutable value objects
+├── infrastructure
+│   ├── config               # Persistence or technical configs
+│   ├── persistence
+│   │   ├── entity           # JPA entities
+│   │   └── repository       # Spring Data JPA repositories
+│   └── mapper               # MapStruct persistence-to-domain mappers
+├── web
+│   ├── controller           # REST controllers
+│   ├── dto                  # Request/response objects
+│   ├── errors               # Global exception handlers
+│   └── filter               # Security filters
+├── VotingApp                # Main Spring Boot class
+├── CorsConfig               # CORS configuration class
+├── DefaultProfileUtil       # Default Spring profile utility
+└── WebSocketConfig          # (Optional) WebSocket configuration
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Frontend (`voting-app-frontend`)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
 ```
+src/
+├── api/                     # Axios client setup
+├── assets/                  # Images & static files
+├── components/              # Reusable UI components
+├── context/                 # React context providers
+├── features/                # Domain features (auth, voting)
+│   ├── auth/
+│   └── voting/
+├── hooks/                   # Custom hooks
+├── routes/                  # React Router config
+├── App.tsx                  # Root component
+└── main.tsx                 # Entry point
+```
+
+## ⚙️ Setup & Run
+
+Follow these steps to get the project up and running locally.
+
+### Backend Setup
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone `https://github.com/Empero47/VotingApp`
+   cd <repo-folder>/backend
+   ```
+2. **Configure MySQL**:
+
+    * Create database `voting_db` in your MySQL server.
+    * Update `application.yml` with your MySQL credentials.
+3. **Build & Run**:
+
+   ```bash
+   ./mvnw clean package
+   java -jar target/votingapp-0.0.1-SNAPSHOT.jar
+   ```
+4. **API Endpoints**:
+
+    * `POST /api/auth/register` — register and receive JWT
+    * `POST /api/auth/login` — login & receive JWT
+    * `POST /api/votes` — cast vote (auth required)
+    * `GET /api/votes/results` — View results (auth required)
+    * `GET /api/admin/candidates` — list candidates (auth required)
+
+### Frontend Setup
+
+1. **Navigate to the frontend folder**:
+
+   ```bash
+   cd <repo-folder>/frontend
+   ```
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+3. **Start the development server**:
+
+   ```bash
+   npm run dev
+   ```
+4. **Access the app**:
+
+    * Open `http://localhost:3000` in your browser.
+
+## 🧚‍♂️ Testing
+
+### Backend Tests
+
+```bash
+./mvnw test
+```
+
+### Frontend Tests
+
+```bash
+npm test
+```
+
+## 📁 Dependencies
+
+### Backend (Maven `pom.xml`)
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-api</artifactId>
+        <version>0.11.5</version>
+    </dependency>
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-impl</artifactId>
+        <version>0.11.5</version>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-jackson</artifactId>
+        <version>0.11.5</version>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <optional>true</optional>
+    </dependency>
+    <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct</artifactId>
+        <version>1.5.5.Final</version>
+    </dependency>
+    <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct-processor</artifactId>
+        <version>1.5.5.Final</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+### Frontend (`package.json`)
+
+```json
+{
+  "dependencies": {
+    "axios": "^1.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "jwt-decode": "^3.1.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.0.0",
+    "@types/node": "^18.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitejs/plugin-react": "^2.0.0",
+    "typescript": "^4.8.0",
+    "vite": "^4.0.0",
+    "jest": "^28.0.0",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/jest-dom": "^5.16.0"
+  }
+}
+```
+
+## 📁 License
+
+MIT License

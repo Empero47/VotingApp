@@ -5,25 +5,29 @@ import com.bolton.votingapp.domain.model.Candidate;
 import com.bolton.votingapp.domain.model.Vote;
 import com.bolton.votingapp.domain.model.Voter;
 import com.bolton.votingapp.domain.usecase.CastVoteUseCase;
-import com.bolton.votingapp.infrastructure.persistence.entity.*;
+import com.bolton.votingapp.domain.repository.CandidateRepository;
+import com.bolton.votingapp.domain.repository.VoteRepository;
+import com.bolton.votingapp.domain.repository.VoterRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class CastVoteServiceImpl implements CastVoteUseCase {
     private final VoterRepository voterRepository;
-    private final CandidateRepository candidateRepo;
-    private final VoteRepository voteRepo;
+    private final CandidateRepository candidateRepository;
+    private final VoteRepository voteRepository;
 
-    public CastVoteServiceImpl(VoterRepository voterRepository, CandidateRepository candidateRepo, VoteRepository voteRepo) {
-        this.voterRepository = voterRepository;
-        this.candidateRepo = candidateRepo;
-        this.voteRepo = voteRepo;
-    }
+//    public CastVoteServiceImpl(VoterRepository voterRepository, CandidateRepository candidateRepository, VoteRepository voteRepo) {
+//        this.voterRepository = voterRepository;
+//        this.candidateRepository = candidateRepository;
+//        this.voteRepo = voteRepo;
+//    }
 
     @Override
     public Vote castVote(Long voterId, Long candidateId) {
         Voter voter = voterRepository.findById(voterId).orElseThrow();
-        Candidate candidate = candidateRepo.findById(candidateId).orElseThrow();
+        Candidate candidate = candidateRepository.findById(candidateId).orElseThrow();
 
         if (voter.isHasVoted()) throw new IllegalStateException("Already voted");
 
@@ -32,7 +36,7 @@ public class CastVoteServiceImpl implements CastVoteUseCase {
         candidate.setVoteCount(candidate.getVoteCount() + 1);
 
         voterRepository.save(voter);
-        candidateRepo.save(candidate);
-        return voteRepo.save(vote);
+        candidateRepository.save(candidate);
+        return voteRepository.save(vote);
     }
 }

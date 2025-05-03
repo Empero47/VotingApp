@@ -4,9 +4,9 @@
 //import com.bolton.votingapp.domain.model.Candidate;
 //import com.bolton.votingapp.domain.model.Vote;
 //import com.bolton.votingapp.domain.model.Voter;
-//import com.bolton.votingapp.infrastructure.persistence.entity.CandidateRepository;
-//import com.bolton.votingapp.infrastructure.persistence.entity.VoteRepository;
-//import com.bolton.votingapp.infrastructure.persistence.entity.VoterRepository;
+//import com.bolton.votingapp.domain.repository.CandidateRepository;
+//import com.bolton.votingapp.domain.repository.VoteRepository;
+//import com.bolton.votingapp.domain.repository.VoterRepository;
 //import org.junit.jupiter.api.Test;
 //import org.junit.jupiter.api.extension.ExtendWith;
 //import org.mockito.InjectMocks;

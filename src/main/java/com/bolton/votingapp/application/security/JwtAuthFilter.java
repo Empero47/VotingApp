@@ -2,12 +2,14 @@ package com.bolton.votingapp.application.security;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
 
+@Slf4j
 @Component
 public class JwtAuthFilter extends GenericFilter {
     private final JwtService jwtService;
@@ -25,7 +27,7 @@ public class JwtAuthFilter extends GenericFilter {
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
             String email = jwtService.extractEmail(token);
-
+            log.info("Email: {}", email);
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(email, null, null);

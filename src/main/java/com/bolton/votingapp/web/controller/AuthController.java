@@ -1,6 +1,7 @@
 package com.bolton.votingapp.web.controller;
 
 import com.bolton.votingapp.application.service.AuthService;
+import com.bolton.votingapp.web.dto.LoginRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,7 +19,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password) {
-        return authService.login(email, password);
+    public String login(@RequestBody LoginRequest loginRequest) {
+        return authService.login(loginRequest.getEmail(), loginRequest.getPassword());
     }
 }

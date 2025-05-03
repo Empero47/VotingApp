@@ -1,23 +1,23 @@
 package com.bolton.votingapp.application.security;
 
+import com.bolton.votingapp.application.config.JwtKeyGenerator;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
 import java.util.Date;
 
 @Service
 public class JwtService {
-    private final String secret = "verysecuresecretkeyverysecuresecretkey"; // 256-bit
-    private final Key key = Keys.hmacShaKeyFor(secret.getBytes());
+    private final SecretKey key = JwtKeyGenerator.generateSecretKey();
 
     public String generateToken(String email) {
         return Jwts.builder()
                 .setSubject(email)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // 1 day
-                .signWith(key)
+                .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
 

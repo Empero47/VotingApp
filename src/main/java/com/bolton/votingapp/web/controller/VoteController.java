@@ -2,19 +2,19 @@ package com.bolton.votingapp.web.controller;
 
 import com.bolton.votingapp.domain.model.VoteModel;
 import com.bolton.votingapp.domain.usecase.CastVoteUseCase;
+import com.bolton.votingapp.web.dto.VoteRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/votes")
 public class VoteController {
     private final CastVoteUseCase castVote;
 
-    public VoteController(CastVoteUseCase castVote) {
-        this.castVote = castVote;
-    }
 
     @PostMapping
-    public VoteModel cast(@RequestParam Long voterId, @RequestParam Long candidateId) {
-        return castVote.castVote(voterId, candidateId);
+    public VoteModel cast(@RequestBody VoteRequest request) {
+        return castVote.castVote(request.getVoterId(), request.getCandidateId());
     }
 }

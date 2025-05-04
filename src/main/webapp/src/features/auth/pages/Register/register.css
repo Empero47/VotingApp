@@ -21,7 +21,8 @@
     font-weight: 500;
     font-family: "DM Sans", sans-serif;
   }
-  
+
+  .name,
   .e_mail,
   .password {
     font-family: "DM Sans", sans-serif;

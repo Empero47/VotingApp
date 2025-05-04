@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Login from '../features/auth/pages/Login/Login';
 import Register from '../features/auth/pages/Register/Register';
 import CastVote from '../features/voting/pages/CastVote';

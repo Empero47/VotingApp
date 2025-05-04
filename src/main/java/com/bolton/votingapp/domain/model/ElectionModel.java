@@ -1,8 +1,10 @@
 // domain/model/ElectionModel.java
 package com.bolton.votingapp.domain.model;
 
+import com.bolton.votingapp.domain.valueobject.Position;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,9 +15,10 @@ import java.util.List;
 @AllArgsConstructor
 public class ElectionModel {
     private Long id;
-    private String name;
+    private String title;
     private String description;
-    private Date date;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private boolean active;
     private List<CandidateModel> candidateModels = new ArrayList<>();
 }

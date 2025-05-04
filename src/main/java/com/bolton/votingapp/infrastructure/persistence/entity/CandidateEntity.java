@@ -21,6 +21,8 @@ public class CandidateEntity {
     @Column(nullable = false)
     private String name;
 
+    private String party;
+
     @Column(name = "vote_count", nullable = false)
     private int voteCount;
 

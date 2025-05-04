@@ -2,6 +2,7 @@ package com.bolton.votingapp.application.service;
 
 import com.bolton.votingapp.domain.model.CandidateModel;
 import com.bolton.votingapp.domain.repository.CandidateRepository;
+import com.bolton.votingapp.domain.repository.ElectionRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class CandidateServiceImpl implements CandidateService {
 
     private final CandidateRepository candidateRepository;
+    private final ElectionRepository electionRepository;
 
 
     @Override
@@ -33,6 +35,8 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     public CandidateModel save(CandidateModel candidateModel) {
+        electionRepository.getById(candidateModel.getElectionId())
+                .map(election -> candidateModel.setElection(election));
         return candidateRepository.save(candidateModel);
     }
 

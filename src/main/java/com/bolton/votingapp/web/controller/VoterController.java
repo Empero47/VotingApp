@@ -5,12 +5,14 @@ import com.bolton.votingapp.application.mapper.VoterMapper;
 import com.bolton.votingapp.domain.model.VoterModel;
 import com.bolton.votingapp.web.dto.VoterRequest;
 import com.bolton.votingapp.web.dto.VoterResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/voters")
 public class VoterController {
@@ -18,10 +20,6 @@ public class VoterController {
     private final VoterService voterService;
     private final VoterMapper voterMapper;
 
-    public VoterController(VoterService voterService, VoterMapper voterMapper) {
-        this.voterService = voterService;
-        this.voterMapper = voterMapper;
-    }
 
     @PostMapping
     public ResponseEntity<VoterResponse> register(@RequestBody VoterRequest request) {

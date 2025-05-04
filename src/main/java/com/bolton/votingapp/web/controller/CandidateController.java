@@ -28,9 +28,9 @@ public class CandidateController {
     }
 
     // Get all candidates by election ID
-    @GetMapping
-    public ResponseEntity<List<CandidateResponse>> getCandidatesByElection(@RequestParam Long electionId) {
-        List<CandidateResponse> candidateResponseList = candidateService.findByElectionId(electionId)
+    @GetMapping("/{id}")
+    public ResponseEntity<List<CandidateResponse>> getCandidatesByElection(@PathVariable Long id) {
+        List<CandidateResponse> candidateResponseList = candidateService.findByElectionId(id)
                 .stream().map(candidateMapper::toResponse)
                 .toList();
 

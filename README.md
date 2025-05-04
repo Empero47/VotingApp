@@ -78,8 +78,8 @@ Follow these steps to get the project up and running locally.
    java -jar target/votingapp-0.0.1-SNAPSHOT.jar
    ```
 4. **API Endpoints**:
-    - `POST /api/auth/register?name=&email=&password=` — register and receive JWT
-    - `POST /api/auth/login?email=&password=` — login & receive JWT
+    - `POST /api/auth/register` — register and receive JWT
+    - `POST /api/auth/login` — login & receive JWT
     - `POST /api/votes?voterId=&candidateId=` — cast vote (auth)
     - `GET /api/votes/results` — View results (auth)
     - `GET /api/admin/candidates` — list candidates (auth)

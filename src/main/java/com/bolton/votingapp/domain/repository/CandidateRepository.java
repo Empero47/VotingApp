@@ -22,4 +22,6 @@ public interface CandidateRepository{
     // Find a candidate by their ID (used for querying candidate details)
 //    Candidate findById(Long id);
     Optional<Candidate> findById(Long id);
+
+    public List<Candidate> findAll();
 }

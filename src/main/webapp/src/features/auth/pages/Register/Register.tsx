@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../../../../api/axios";
+// @ts-ignore
 import "./register.css";
 import { useAuth } from "../../../../context/AuthContext";
 import { Link } from "react-router-dom";

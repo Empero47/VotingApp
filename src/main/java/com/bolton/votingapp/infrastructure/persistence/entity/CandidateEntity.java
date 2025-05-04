@@ -21,7 +21,8 @@ public class CandidateEntity {
     @Column(nullable = false)
     private String name;
 
-    private String party;
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private PartyEntity party;
 
     @Column(name = "vote_count", nullable = false)
     private int voteCount;

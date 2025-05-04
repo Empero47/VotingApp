@@ -1,5 +1,6 @@
 package com.bolton.votingapp.application.service;
 
+import com.bolton.votingapp.domain.repository.PartyRepository;
 import com.bolton.votingapp.domain.model.CandidateModel;
 import com.bolton.votingapp.domain.repository.CandidateRepository;
 import com.bolton.votingapp.domain.repository.ElectionRepository;
@@ -16,6 +17,7 @@ public class CandidateServiceImpl implements CandidateService {
 
     private final CandidateRepository candidateRepository;
     private final ElectionRepository electionRepository;
+    private final PartyRepository partyRepository;
 
 
     @Override
@@ -35,8 +37,13 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     public CandidateModel save(CandidateModel candidateModel) {
-        electionRepository.getById(candidateModel.getElectionId())
-                .map(election -> candidateModel.setElection(election));
+        var election = electionRepository.getById(candidateModel.getElectionId())
+                .orElseThrow(RuntimeException::new);
+
+        var party = partyRepository.getById(candidateModel.getPartyId())
+                .orElseThrow(RuntimeException::new);
+        candidateModel.setElection(election);
+        candidateModel.setParty(party);
         return candidateRepository.save(candidateModel);
     }
 

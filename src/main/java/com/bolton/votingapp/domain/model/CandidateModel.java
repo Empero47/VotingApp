@@ -1,6 +1,5 @@
 package com.bolton.votingapp.domain.model;
 
-//import com.bolton.votingapp.domain.valueobject.Position;
 import lombok.*;
 
 @Getter
@@ -11,9 +10,11 @@ public class CandidateModel {
     private ElectionModel election;
     private Long electionId;
     @Setter
+    private PartyModel party;
+    @Setter
+    private Long partyId;
+    @Setter
     private String name;
     @Setter
     private int voteCount;
-
-//    private Position position;
 }

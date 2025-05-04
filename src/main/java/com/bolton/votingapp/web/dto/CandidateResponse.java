@@ -6,6 +6,9 @@ import lombok.Data;
 public class CandidateResponse {
     private Long id;
     private String name;
-    private String party;
+    private String partyTitle;
+    private String partyId;
+    private String electionTitle;
     private Long electionId;
+    private String electionDescription;
 }

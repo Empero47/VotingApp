@@ -1,9 +1,9 @@
 package com.bolton.votingapp.application.service;
 
 
-import com.bolton.votingapp.domain.model.Candidate;
-import com.bolton.votingapp.domain.model.Vote;
-import com.bolton.votingapp.domain.model.Voter;
+import com.bolton.votingapp.domain.model.CandidateModel;
+import com.bolton.votingapp.domain.model.VoteModel;
+import com.bolton.votingapp.domain.model.VoterModel;
 import com.bolton.votingapp.domain.usecase.CastVoteUseCase;
 import com.bolton.votingapp.domain.repository.CandidateRepository;
 import com.bolton.votingapp.domain.repository.VoteRepository;
@@ -25,18 +25,18 @@ public class CastVoteServiceImpl implements CastVoteUseCase {
 //    }
 
     @Override
-    public Vote castVote(Long voterId, Long candidateId) {
-        Voter voter = voterRepository.findById(voterId).orElseThrow();
-        Candidate candidate = candidateRepository.findById(candidateId).orElseThrow();
+    public VoteModel castVote(Long voterId, Long candidateId) {
+        VoterModel voterModel = voterRepository.findById(voterId).orElseThrow();
+        CandidateModel candidateModel = candidateRepository.findById(candidateId).orElseThrow();
 
-        if (voter.isHasVoted()) throw new IllegalStateException("Already voted");
+        if (voterModel.isHasVoted()) throw new IllegalStateException("Already voted");
 
-        Vote vote = new Vote(null, voter.getId(), candidate.getId());
-        voter.setHasVoted(true);
-        candidate.setVoteCount(candidate.getVoteCount() + 1);
+        VoteModel voteModel = new VoteModel(null, voterModel.getId(), candidateModel.getId());
+        voterModel.setHasVoted(true);
+        candidateModel.setVoteCount(candidateModel.getVoteCount() + 1);
 
-        voterRepository.save(voter);
-        candidateRepository.save(candidate);
-        return voteRepository.save(vote);
+        voterRepository.save(voterModel);
+        candidateRepository.save(candidateModel);
+        return voteRepository.save(voteModel);
     }
 }

@@ -1,51 +1,52 @@
 package com.bolton.votingapp.application.service;
 
-import com.bolton.votingapp.domain.model.Election;
+import com.bolton.votingapp.application.mapper.ElectionMapper;
+import com.bolton.votingapp.domain.model.ElectionModel;
 import com.bolton.votingapp.domain.repository.ElectionRepository;
-import jakarta.persistence.EntityNotFoundException;
+import com.bolton.votingapp.infrastructure.persistence.entity.ElectionEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-
+@RequiredArgsConstructor
 @Service
 public class ElectionServiceImpl implements ElectionService {
 
     private final ElectionRepository electionRepository;
+    private final ElectionMapper electionMapper;
 
-    public ElectionServiceImpl(ElectionRepository electionRepository) {
-        this.electionRepository = electionRepository;
+    @Override
+    public ElectionModel createElection(ElectionModel electionModel) {
+        ElectionEntity electionEntity = electionMapper.toEntity(electionModel);
+        electionRepository.save(electionEntity);
+        return electionMapper.toModel(electionEntity);
     }
 
     @Override
-    public List<Election> findAll() {
-        return electionRepository.findAll();
+    public List<ElectionModel> getAllElections() {
+        return electionRepository.getAllElections();
     }
 
     @Override
-    public Optional<Election> findById(Long id) {
-        return electionRepository.findById(id);
+    public ElectionModel getElectionById(Long electionId) {
+        return electionRepository.getElectionById(electionId)
+                .orElseThrow(() -> new RuntimeException("ElectionModel not found"));
     }
 
     @Override
-    public Election save(Election election) {
-        return electionRepository.save(election);
+    public ElectionModel updateElection(Long electionId, ElectionModel updatedElectionModel) {
+        ElectionModel electionModel = getElectionById(electionId);
+        electionModel.setName(updatedElectionModel.getName());
+        electionModel.setDescription(updatedElectionModel.getDescription());
+        electionModel.setDate(updatedElectionModel.getDate());
+        electionModel.setActive(updatedElectionModel.isActive());
+        electionRepository.save(electionMapper.toEntity(electionModel));
+        return electionModel;
     }
 
     @Override
-    public Election update(Long id, Election election) {
-        Election existing = electionRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Election not found"));
-        existing.setTitle(election.getTitle());
-        existing.setDescription(election.getDescription());
-        existing.setStartDate(election.getStartDate());
-        existing.setEndDate(election.getEndDate());
-        return electionRepository.save(existing);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        electionRepository.deleteById(id);
+    public void deleteElection(Long electionId) {
+        electionRepository.deleteElection(electionId);
     }
 }
 

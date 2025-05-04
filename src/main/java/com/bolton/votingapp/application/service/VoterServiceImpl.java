@@ -1,9 +1,8 @@
 package com.bolton.votingapp.application.service;
 
 import com.bolton.votingapp.application.mapper.VoterMapper;
-import com.bolton.votingapp.domain.model.Voter;
+import com.bolton.votingapp.domain.model.VoterModel;
 import com.bolton.votingapp.domain.repository.VoterRepository;
-import com.bolton.votingapp.infrastructure.persistence.entity.VoterEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +16,9 @@ public class VoterServiceImpl implements VoterService {
     private final VoterMapper voterMapper;
 
     @Override
-    public Voter registerVoter(Voter voter) {
-        // VoterEntity entity = voterMapper.toEntity(voter); // Mapping domain to entity
-        Voter saved = voterRepository.save(voter); // Save to DB
+    public VoterModel registerVoter(VoterModel voterModel) {
+        // VoterEntity entity = voterMapper.toEntity(voterModel); // Mapping domain to entity
+        VoterModel saved = voterRepository.save(voterModel); // Save to DB
         return saved; // Convert back to domain model
     }
 
@@ -29,8 +28,8 @@ public class VoterServiceImpl implements VoterService {
     }
 
     @Override
-    public List<Voter> getAllVoters() {
-        List<Voter> voters = voterRepository.findAll(); // Get all entities
-        return voters; // Map to domain objects
+    public List<VoterModel> getAllVoters() {
+        List<VoterModel> voterModels = voterRepository.findAll(); // Get all entities
+        return voterModels; // Map to domain objects
     }
 }

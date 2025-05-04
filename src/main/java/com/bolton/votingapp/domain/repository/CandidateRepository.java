@@ -1,7 +1,6 @@
 package com.bolton.votingapp.domain.repository;
 
-import com.bolton.votingapp.domain.model.Candidate;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.bolton.votingapp.domain.model.CandidateModel;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,17 +10,18 @@ import java.util.Optional;
 public interface CandidateRepository{
 
     // Save Candidates
-    Candidate save(Candidate candidate);
+    CandidateModel save(CandidateModel candidateModel);
 
     // Find all candidates in a specific election
-    List<Candidate> findByElectionId(Long electionId);
+    List<CandidateModel> findByElectionId(Long electionId);
 
     // Find a candidate by their name
-    Candidate findByName(String name);
+    CandidateModel findByName(String name);
 
     // Find a candidate by their ID (used for querying candidate details)
-//    Candidate findById(Long id);
-    Optional<Candidate> findById(Long id);
+//    CandidateModel findById(Long id);
+    Optional<CandidateModel> findById(Long id);
 
-    public List<Candidate> findAll();
+    List<CandidateModel> findAll();
+    void deleteById(Long id);
 }

@@ -16,7 +16,7 @@ export default function AppRoutes() {
 
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
-                <Route path="/vote" element={<CastVote />} />
+                <Route path="/voteModel" element={<CastVote />} />
                 <Route path="/results" element={<ViewResults />} />
                 <Route path="/admin" element={<AdminPanel />} />
             </Route>

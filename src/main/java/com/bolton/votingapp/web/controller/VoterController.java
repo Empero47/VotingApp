@@ -2,7 +2,7 @@ package com.bolton.votingapp.web.controller;
 
 import com.bolton.votingapp.application.service.VoterService;
 import com.bolton.votingapp.application.mapper.VoterMapper;
-import com.bolton.votingapp.domain.model.Voter;
+import com.bolton.votingapp.domain.model.VoterModel;
 import com.bolton.votingapp.web.dto.VoterRequest;
 import com.bolton.votingapp.web.dto.VoterResponse;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +28,8 @@ public class VoterController {
         if (voterService.existsByEmail(request.getEmail())) {
             return ResponseEntity.badRequest().build();
         }
-        Voter voter = voterService.registerVoter(voterMapper.toDomain(request));
-        return ResponseEntity.ok(voterMapper.toResponse(voter));
+        VoterModel voterModel = voterService.registerVoter(voterMapper.toDomain(request));
+        return ResponseEntity.ok(voterMapper.toResponse(voterModel));
     }
 
     @GetMapping

@@ -1,6 +1,6 @@
 package com.bolton.votingapp.application.mapper;
 
-import com.bolton.votingapp.domain.model.Voter;
+import com.bolton.votingapp.domain.model.VoterModel;
 import com.bolton.votingapp.infrastructure.persistence.entity.VoterEntity;
 import com.bolton.votingapp.web.dto.VoterRequest;
 import com.bolton.votingapp.web.dto.VoterResponse;
@@ -13,13 +13,13 @@ import java.util.List;
 public interface VoterMapper {
 
     // DTO mappings
-    Voter toDomain(VoterRequest request);
-    VoterResponse toResponse(Voter voter);
+    VoterModel toDomain(VoterRequest request);
+    VoterResponse toResponse(VoterModel voterModel);
 
     // Persistence mappings
-    VoterEntity toEntity(Voter voter);
-    Voter toDomain(VoterEntity entity);
-    VoterRequest toRequest(Voter voter);
-    List<Voter> toDomainList(List<VoterEntity> entities);
+    VoterEntity toEntity(VoterModel voterModel);
+    VoterModel toDomain(VoterEntity entity);
+    VoterRequest toRequest(VoterModel voterModel);
+    List<VoterModel> toDomainList(List<VoterEntity> entities);
 
 }

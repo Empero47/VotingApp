@@ -5,9 +5,9 @@
 ## 📚 Features
 
 - Voter registration & login (JWT)
-- Cast a vote for candidates
+- Cast a voteModel for candidateModels
 - Real-time result tallying
-- Admin panel for managing candidates
+- Admin panel for managing candidateModels
 - Route protection for authenticated users
 
 ## 🗂️ Project Structure
@@ -24,7 +24,7 @@ com.bolton.votingapp
 ├── domain                     # Core business logic
 │   ├── exception              # Domain-specific exceptions
 │   ├── model                  # Entities (Voter, Candidate, Vote)
-│   ├── usecase                # Business use cases (cast vote, tally)
+│   ├── usecase                # Business use cases (cast voteModel, tally)
 │   └── valueobject            # Immutable types (VoteId, Email)
 ├── infrastructure.persistence # MySQL & JPA persistence
 │   └── entity
@@ -80,9 +80,9 @@ Follow these steps to get the project up and running locally.
 4. **API Endpoints**:
     - `POST /api/auth/register` — register and receive JWT
     - `POST /api/auth/login` — login & receive JWT
-    - `POST /api/votes?voterId=&candidateId=` — cast vote (auth)
+    - `POST /api/votes?voterId=&candidateId=` — cast voteModel (auth)
     - `GET /api/votes/results` — View results (auth)
-    - `GET /api/admin/candidates` — list candidates (auth)
+    - `GET /api/admin/candidateModels` — list candidateModels (auth)
 
 ### Frontend Setup
 

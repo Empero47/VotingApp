@@ -1,7 +1,7 @@
 package com.bolton.votingapp.infrastructure.persistence.adapter;
 
 import com.bolton.votingapp.application.mapper.VoterMapper;
-import com.bolton.votingapp.domain.model.Voter;
+import com.bolton.votingapp.domain.model.VoterModel;
 import com.bolton.votingapp.infrastructure.persistence.repository.VoterJpaRepository;
 import com.bolton.votingapp.domain.repository.VoterRepository;
 import com.bolton.votingapp.infrastructure.persistence.entity.VoterEntity;
@@ -19,13 +19,13 @@ public class VoterRepositoryImpl implements VoterRepository {
     private final VoterMapper voterMapper;
 
     @Override
-    public Voter save(Voter voter) {
-        VoterEntity entity = voterMapper.toEntity(voter);
+    public VoterModel save(VoterModel voterModel) {
+        VoterEntity entity = voterMapper.toEntity(voterModel);
         return voterMapper.toDomain(voterJpaRepository.save(entity));
     }
 
     @Override
-    public Optional<Voter> findByEmail(String email) {
+    public Optional<VoterModel> findByEmail(String email) {
         return voterJpaRepository.findByEmail(email)
                 .map(voterMapper::toDomain);
     }
@@ -36,7 +36,7 @@ public class VoterRepositoryImpl implements VoterRepository {
     }
 
     @Override
-    public List<Voter> findAll() {
+    public List<VoterModel> findAll() {
         return voterJpaRepository.findAll()
                 .stream()
                 .map(voterMapper::toDomain)
@@ -44,7 +44,7 @@ public class VoterRepositoryImpl implements VoterRepository {
     }
 
     @Override
-    public Optional<Voter> findById(long id) {
+    public Optional<VoterModel> findById(long id) {
         return voterJpaRepository.findById(id).map(voterMapper::toDomain);
     }
 }

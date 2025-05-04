@@ -1,16 +1,17 @@
 package com.bolton.votingapp.domain.repository;
 
-import com.bolton.votingapp.domain.model.Election;
+import com.bolton.votingapp.domain.model.ElectionModel;
 import com.bolton.votingapp.infrastructure.persistence.entity.ElectionEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ElectionRepository {
-    public Election save(ElectionEntity election);
-    public List<Election> getAllElections();
-    Election getElectionById(Long electionId);
-    Election updateElection(Long electionId, Election updatedElection);
+    ElectionModel save(ElectionEntity election);
+    List<ElectionModel> getAllElections();
+    Optional<ElectionModel> getElectionById(Long electionId);
+    ElectionModel updateElection(Long electionId, ElectionModel updatedElectionModel);
     public void deleteElection(Long electionId);
 }

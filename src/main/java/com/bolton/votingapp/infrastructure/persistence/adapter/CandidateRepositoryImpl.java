@@ -1,6 +1,6 @@
 package com.bolton.votingapp.infrastructure.persistence.adapter;
 
-import com.bolton.votingapp.domain.model.Candidate;
+import com.bolton.votingapp.domain.model.CandidateModel;
 import com.bolton.votingapp.infrastructure.persistence.repository.CandidateJpaRepository;
 import com.bolton.votingapp.domain.repository.CandidateRepository;
 import com.bolton.votingapp.infrastructure.persistence.entity.CandidateEntity;
@@ -20,38 +20,43 @@ public class CandidateRepositoryImpl implements CandidateRepository {
     private final CandidateMapper candidateMapper;
 
     @Override
-    public Candidate save(Candidate candidate) {
-        CandidateEntity ent = candidateMapper.toEntity(candidate);
+    public CandidateModel save(CandidateModel candidateModel) {
+        CandidateEntity ent = candidateMapper.toEntity(candidateModel);
         CandidateEntity saved = candidateJpaRepository.save(ent);
-        return candidateMapper.toDomain(saved);
+        return candidateMapper.toModel(saved);
     }
 
     @Override
-    public List<Candidate> findByElectionId(Long electionId) {
+    public List<CandidateModel> findByElectionId(Long electionId) {
         return candidateJpaRepository.findByElectionId(electionId)
                 .stream()
-                .map(candidateMapper::toDomain)
+                .map(candidateMapper::toModel)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Candidate findByName(String name) {
+    public CandidateModel findByName(String name) {
         return candidateJpaRepository.findByName(name)
-                .map(candidateMapper::toDomain)
-                .orElse(null);  // Or handle appropriately if not found
+                .map(candidateMapper::toModel)
+                .orElseThrow(IllegalArgumentException::new);  // Or handle appropriately if not found
     }
 
     @Override
-    public Optional<Candidate> findById(Long id) {
+    public Optional<CandidateModel> findById(Long id) {
         return candidateJpaRepository.findById(id)
-                .map(candidateMapper::toDomain);
+                .map(candidateMapper::toModel);
     }
 
     @Override
-    public List<Candidate> findAll() {
+    public List<CandidateModel> findAll() {
         return candidateJpaRepository.findAll()
                 .stream()
-                .map(candidateMapper::toDomain)
+                .map(candidateMapper::toModel)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        candidateJpaRepository.deleteById(id);
     }
 }

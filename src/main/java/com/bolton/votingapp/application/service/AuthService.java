@@ -1,6 +1,6 @@
 package com.bolton.votingapp.application.service;
 
-import com.bolton.votingapp.domain.model.Voter;
+import com.bolton.votingapp.domain.model.VoterModel;
 import com.bolton.votingapp.domain.repository.VoterRepository;
 import com.bolton.votingapp.application.security.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -24,15 +24,15 @@ public class AuthService {
 
     public String register(String name, String email, String rawPassword) {
         if (voterRepository.findByEmail(email).isPresent()) throw new IllegalArgumentException("Email exists");
-        Voter voter = new Voter(null, name, email, encoder.encode(rawPassword), false);
-        voterRepository.save(voter);
+        VoterModel voterModel = new VoterModel(null, name, email, encoder.encode(rawPassword), false);
+        voterRepository.save(voterModel);
         return jwtService.generateToken(email);
     }
 
     public String login(String email, String password) {
-        Voter voter = voterRepository.findByEmail(email).orElseThrow();
-        log.info("Voter: {}", voter);
-        if (!encoder.matches(password, voter.getPassword()))
+        VoterModel voterModel = voterRepository.findByEmail(email).orElseThrow();
+        log.info("VoterModel: {}", voterModel);
+        if (!encoder.matches(password, voterModel.getPassword()))
             throw new IllegalArgumentException("Invalid credentials");
 
         return jwtService.generateToken(email);

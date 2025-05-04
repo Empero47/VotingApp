@@ -5,9 +5,9 @@
 ## 📚 Features
 
 * Voter registration & login (JWT)
-* Cast a vote for candidates
+* Cast a voteModel for candidateModels
 * Real-time result tallying
-* Admin panel for managing candidates
+* Admin panel for managing candidateModels
 * Route protection for authenticated users
 
 ## 🗂️ Project Structure
@@ -85,9 +85,9 @@ Follow these steps to get the project up and running locally.
 
     * `POST /api/auth/register` — register and receive JWT
     * `POST /api/auth/login` — login & receive JWT
-    * `POST /api/votes` — cast vote (auth required)
+    * `POST /api/votes` — cast voteModel (auth required)
     * `GET /api/votes/results` — View results (auth required)
-    * `GET /api/admin/candidates` — list candidates (auth required)
+    * `GET /api/admin/candidateModels` — list candidateModels (auth required)
 
 ### Frontend Setup
 

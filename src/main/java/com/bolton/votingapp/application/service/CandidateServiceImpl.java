@@ -1,6 +1,6 @@
 package com.bolton.votingapp.application.service;
 
-import com.bolton.votingapp.domain.model.Candidate;
+import com.bolton.votingapp.domain.model.CandidateModel;
 import com.bolton.votingapp.domain.repository.CandidateRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -17,27 +17,31 @@ public class CandidateServiceImpl implements CandidateService {
 
 
     @Override
-    public List<Candidate> findAll() {
+    public List<CandidateModel> findAll() {
         return candidateRepository.findAll();
     }
 
     @Override
-    public Optional<Candidate> findById(Long id) {
+    public Optional<CandidateModel> findById(Long id) {
         return candidateRepository.findById(id);
     }
 
     @Override
-    public Candidate save(Candidate candidate) {
-        return candidateRepository.save(candidate);
+    public List<CandidateModel> findByElectionId(Long id) {
+        return candidateRepository.findByElectionId(id);
     }
 
     @Override
-    public Candidate update(Long id, Candidate candidate) {
-        Candidate existing = candidateRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Candidate not found"));
-        existing.setName(candidate.getName());
-        existing.setParty(candidate.getParty());
-        // Set other fields
+    public CandidateModel save(CandidateModel candidateModel) {
+        return candidateRepository.save(candidateModel);
+    }
+
+    @Override
+    public CandidateModel update(Long id, CandidateModel candidateModel) {
+        CandidateModel existing = candidateRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("CandidateModel not found"));
+        existing.setName(candidateModel.getName());
+//        existing.setParty(candidateModel.getParty());
         return candidateRepository.save(existing);
     }
 

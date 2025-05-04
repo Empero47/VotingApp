@@ -1,7 +1,7 @@
 package com.bolton.votingapp.infrastructure.persistence.adapter;
 
 import com.bolton.votingapp.application.mapper.VoteMapper;
-import com.bolton.votingapp.domain.model.Vote;
+import com.bolton.votingapp.domain.model.VoteModel;
 import com.bolton.votingapp.infrastructure.persistence.repository.VoteJpaRepository;
 import com.bolton.votingapp.domain.repository.VoteRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +17,8 @@ public class VoteRepositoryImpl implements VoteRepository {
     private final VoteMapper voteMapper;
 
     @Override
-    public Vote save(Vote vote) {
-        return voteMapper.toDomain(voteJpaRepository.save(voteMapper.toEntity(vote)));
+    public VoteModel save(VoteModel voteModel) {
+        return voteMapper.toDomain(voteJpaRepository.save(voteMapper.toEntity(voteModel)));
     }
 
     @Override
@@ -27,17 +27,17 @@ public class VoteRepositoryImpl implements VoteRepository {
     }
 
     @Override
-    public List<Vote> findByElectionId(Long electionId) {
+    public List<VoteModel> findByElectionId(Long electionId) {
         return List.of();
     }
 
     @Override
-    public List<Vote> findByVoterId(Long voterId) {
+    public List<VoteModel> findByVoterId(Long voterId) {
         return List.of();
     }
 
     @Override
-    public Vote findById(long id) {
+    public VoteModel findById(long id) {
         return null;
     }
 }

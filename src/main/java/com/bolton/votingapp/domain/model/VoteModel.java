@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Vote {
+public class VoteModel {
     private Long id;
     private Long voterId;
     private Long candidateId;

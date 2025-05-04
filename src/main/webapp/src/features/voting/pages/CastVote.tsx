@@ -7,7 +7,7 @@ export default function CastVote() {
 
     const handleVote = async (candidateId: string) => {
         await api.post('/votes', { candidateId });
-        alert('Vote cast successfully!');
+        alert('VoteModel cast successfully!');
     };
 
     if (loading) return <p>Loading candidates...</p>;

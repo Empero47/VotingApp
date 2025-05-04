@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
 
 @OpenAPIDefinition(
   info = @Info(
-    title = "Todo Management API",
+    title = "Voting Management API",
     version = "1.0.0",
     description = "A code‑first example with Springdoc and Swagger UI",
     contact = @Contact(name = "Your Name", email = "you@example.com"),

@@ -36,11 +36,22 @@ public class CandidateRepositoryImpl implements CandidateRepository {
 
     @Override
     public Candidate findByName(String name) {
-        return null;
+        return candidateJpaRepository.findByName(name)
+                .map(candidateMapper::toDomain)
+                .orElse(null);  // Or handle appropriately if not found
     }
 
     @Override
     public Optional<Candidate> findById(Long id) {
-        return Optional.empty();
+        return candidateJpaRepository.findById(id)
+                .map(candidateMapper::toDomain);
+    }
+
+    @Override
+    public List<Candidate> findAll() {
+        return candidateJpaRepository.findAll()
+                .stream()
+                .map(candidateMapper::toDomain)
+                .collect(Collectors.toList());
     }
 }

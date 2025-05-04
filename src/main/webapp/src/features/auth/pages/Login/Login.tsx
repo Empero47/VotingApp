@@ -1,6 +1,8 @@
 import { useState } from "react";
 import api from "../../../../api/axios";
-import "../Login/login.css";
+// import "../Login/login.css";
+// @ts-ignore
+import "./login.css";
 import { useAuth } from "../../../../context/AuthContext";
 import { Link } from "react-router-dom";
 
@@ -10,11 +12,14 @@ export default function Login() {
   const { login } = useAuth();
 
   const handleLogin = async () => {
-    const res = await api.post("/auth/login", { email, password }, {
-      params: { email, password },
-    });
-    login(res.data);
+    try {
+      const res = await api.post("/auth/login", { email, password });
+      login(res.data);
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
+
 
   return (
     <>
